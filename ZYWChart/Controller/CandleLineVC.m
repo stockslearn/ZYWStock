@@ -72,7 +72,7 @@ typedef enum
 {
     [super viewDidLoad];
     self.navigationItem.title  = @"K线图";
-    _type = MACD;
+    _type = MACD;//三种类型的技术指标线
     [self addSubViews];
     [self addBottomViews];
     [self initCrossLine];
@@ -80,7 +80,8 @@ typedef enum
     [self addActivityView];
     self.view.backgroundColor = [UIColor whiteColor];
     self.dataSource = [NSMutableArray array];
-    [self loadData];
+//    [self loadData];
+    [self loadJSONdata];
 }
 
 #pragma mark 添加视图
@@ -97,7 +98,7 @@ typedef enum
         make.size.mas_equalTo(CGSizeMake(15, 15));
     }];
 }
-
+//最高价 最低价  开盘价 收盘价的告示
 - (void)addQuotaView
 {
     _quotaView = [ZYWQuotaView new];
@@ -109,7 +110,7 @@ typedef enum
         make.height.equalTo(@(100));
     }];
 }
-
+//滚动视图
 - (void)addScrollView
 {
     _scrollView = [UIScrollView new];
@@ -125,7 +126,7 @@ typedef enum
         make.height.equalTo(@((DEVICE_HEIGHT - 64 - 100)*ScrollScale));
     }];
 }
-
+//蜡状主图
 - (void)addCandleChartView
 {
     _candleChartView = [ZYWCandleChartView new];
@@ -146,7 +147,7 @@ typedef enum
 }
 
 - (void)addTopBoxView
-{
+{//顶部的框图
     _topBoxView = [UIView new];
     [self.view addSubview:_topBoxView];
     _topBoxView.userInteractionEnabled = NO;
@@ -161,7 +162,7 @@ typedef enum
 }
 
 - (void)addTechnicalView
-{
+{//技术指标
     _technicalView = [ZYWTecnnicalView new];
     [self.view addSubview:_technicalView];
     _technicalView.delagate = self;
@@ -178,7 +179,7 @@ typedef enum
 }
 
 - (void)addBottomView
-{
+{//底部视图 也是一个左右滚动的视图
     _bottomView = [UIView new];
     [_scrollView addSubview:_bottomView];
     [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -205,7 +206,7 @@ typedef enum
 }
 
 - (void)addPriceView
-{
+{//顶部和底部都有价格视图
     _topPriceView = [ZYWPriceView new];
     [self.view addSubview:_topPriceView];
     
@@ -263,6 +264,7 @@ typedef enum
         make.top.bottom.equalTo(_bottomView);
         make.left.right.equalTo(_bottomView);
     }];
+//    _macdView.hidden = YES;
     
     _kdjLineView = [ZYWKdjLineView new];
     [_bottomView addSubview:_kdjLineView];
@@ -271,7 +273,7 @@ typedef enum
         make.top.bottom.equalTo(_bottomView);
         make.left.right.equalTo(_bottomView);
     }];
-    _kdjLineView.hidden = YES;
+//    _kdjLineView.hidden = YES;
     
     _wrLineView = [ZYWWrLineView new];
     [_bottomView addSubview:_wrLineView];
@@ -280,7 +282,7 @@ typedef enum
         make.top.bottom.equalTo(_bottomView);
         make.left.right.equalTo(_bottomView);
     }];
-    _wrLineView.hidden = YES;
+//    _wrLineView.hidden = YES;
 }
 
 #pragma mark 十字线
@@ -290,7 +292,8 @@ typedef enum
     self.verticalView = [UIView new];
     self.verticalView.clipsToBounds = YES;
     [self.scrollView addSubview:self.verticalView];
-    self.verticalView.backgroundColor = [UIColor colorWithHexString:@"666666"];
+//    self.verticalView.backgroundColor = [UIColor colorWithHexString:@"666666"];
+    self.verticalView.backgroundColor = [UIColor redColor];
     [self.verticalView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topBoxView);
         make.width.equalTo(@(_candleChartView.lineWidth));
@@ -301,7 +304,9 @@ typedef enum
     self.leavView = [UIView new];
     self.leavView.clipsToBounds = YES;
     [self.scrollView addSubview:self.leavView];
-    self.leavView.backgroundColor = [UIColor colorWithHexString:@"666666"];;
+//    self.leavView.backgroundColor = [UIColor colorWithHexString:@"666666"];;
+    self.leavView.backgroundColor = [UIColor redColor];
+    self.leavView.width = 10;
     [self.leavView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(0));
         make.left.equalTo(self.view);
@@ -309,8 +314,8 @@ typedef enum
         make.height.equalTo(@(_candleChartView.lineWidth));
     }];
     
-    self.leavView.hidden = YES;
-    self.verticalView.hidden = YES;
+//    self.leavView.hidden = YES;
+//    self.verticalView.hidden = YES;
 }
 
 #pragma mark 指标切换代理
@@ -471,7 +476,41 @@ typedef enum
     }
 }
 
-#pragma mark 数据读取
+#pragma mark 数据读取    -----考虑换一下数据源  做一个测试
+-(void)loadJSONdata{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"600031.json" ofType:nil];
+    NSLog(@"path---%@",path);
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    NSLog(@"%@",dict);
+    NSMutableArray *dataArray = [NSMutableArray array];
+    for (NSDictionary *attributeDict in dict) {
+//        [dataArray addObject:subDic[@"volume"]];
+        ZYWCandleModel *data = [[ZYWCandleModel alloc] init];
+        data.open = [[attributeDict objectForKey:@"open"] floatValue];
+        data.high = [[attributeDict objectForKey:@"high"] floatValue];
+        data.low =  [[attributeDict objectForKey:@"low"] floatValue];
+        data.close = [[attributeDict objectForKey:@"close"] floatValue];
+        data.date = [attributeDict objectForKey:@"date"];
+        self.model = data;
+        [dataArray addObject:data];
+    }
+    
+    self.dataSource = dataArray;
+    
+    NSMutableArray * newMarray = [NSMutableArray array];
+    NSEnumerator * enumerator = [self.dataSource reverseObjectEnumerator];
+    
+    id object;
+    while (object = [enumerator nextObject])
+    {
+        [newMarray addObject:object];
+    }
+    [self reloadData:newMarray reload:NO];
+
+//    [self reloadData:self.dataSource reload:NO];
+}
 
 - (void)loadData {
     NSString *fileName = @"N225.xml";
@@ -575,6 +614,7 @@ typedef enum
     [self showIndexLineView:leftPostion startIndex:index count:count];
 }
 
+//底部切换技术指标视图
 - (void)showIndexLineView:(CGFloat)leftPostion startIndex:(NSInteger)index count:(NSInteger)count
 {
     _topPriceView.maxPriceLabel.text = [NSString stringWithFormat:@"%.2f",self.candleChartView.maxY];

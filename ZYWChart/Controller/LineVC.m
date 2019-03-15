@@ -34,7 +34,7 @@
     NSData *data = [NSData dataWithContentsOfFile:path];
     
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//    NSLog(@"%@",dict);
+    NSLog(@"%@",dict);
     NSMutableArray *dataArray = [NSMutableArray array];
     for (NSDictionary *subDic in dict) {
         [dataArray addObject:subDic[@"volume"]];
