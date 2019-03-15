@@ -214,6 +214,7 @@
 		42E7292F1E13C80200682B3E /* ZYWCandleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E7292E1E13C80200682B3E /* ZYWCandleModel.m */; };
 		42E729341E13CAF200682B3E /* CandleLineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E729331E13CAF200682B3E /* CandleLineVC.m */; };
 		79715BAE312AE6B07031DB82 /* libPods-ZYWChart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2B8C997449299EE5E08697 /* libPods-ZYWChart.a */; };
+		FDE3A541223B5140003AF2CB /* 600031.json in Resources */ = {isa = PBXBuildFile; fileRef = FDE3A540223B5140003AF2CB /* 600031.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -494,6 +495,7 @@
 		42E729331E13CAF200682B3E /* CandleLineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandleLineVC.m; sourceTree = "<group>"; };
 		4F7C1CFF0292A45235298718 /* Pods-ZYWChart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYWChart.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZYWChart/Pods-ZYWChart.debug.xcconfig"; sourceTree = "<group>"; };
 		A8CBF1D36897BA6C3C8ABB35 /* Pods-ZYWChart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYWChart.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZYWChart/Pods-ZYWChart.release.xcconfig"; sourceTree = "<group>"; };
+		FDE3A540223B5140003AF2CB /* 600031.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 600031.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -585,6 +587,7 @@
 				4227878C1E04F18600DB5CEC /* Assets.xcassets */,
 				4227878E1E04F18600DB5CEC /* LaunchScreen.storyboard */,
 				422787911E04F18600DB5CEC /* Info.plist */,
+				FDE3A540223B5140003AF2CB /* 600031.json */,
 				424236291EC1ED8300C161A8 /* N225.xml */,
 				422BF0B91EC7081400DF8F4A /* data.plist */,
 				422787801E04F18600DB5CEC /* Supporting Files */,
@@ -1050,6 +1053,7 @@
 			files = (
 				422BF0BA1EC7081400DF8F4A /* data.plist in Resources */,
 				422787901E04F18600DB5CEC /* LaunchScreen.storyboard in Resources */,
+				FDE3A541223B5140003AF2CB /* 600031.json in Resources */,
 				4227878D1E04F18600DB5CEC /* Assets.xcassets in Resources */,
 				4242362A1EC1ED8400C161A8 /* N225.xml in Resources */,
 				423942841E2B6D0300F2A873 /* ta_retcode.csv in Resources */,

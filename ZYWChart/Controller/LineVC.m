@@ -29,11 +29,25 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"折线图";
     
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"600031.json" ofType:nil];
+    NSLog(@"path---%@",path);
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//    NSLog(@"%@",dict);
+    NSMutableArray *dataArray = [NSMutableArray array];
+    for (NSDictionary *subDic in dict) {
+        [dataArray addObject:subDic[@"volume"]];
+    }
+    
     _lineView = [[ZYWLineView alloc] init];
     _lineView.lineWidth = 2;
     _lineView.backgroundColor = [UIColor colorWithHexString:@"8B6969"];
-    _lineView.lineColor = [UIColor colorWithHexString:@"C0FF3E"];
-    _lineView.fillColor = [UIColor colorWithHexString:@"CD3278"];
+//    _lineView.lineColor = [UIColor colorWithHexString:@"C0FF3E"];
+//    _lineView.fillColor = [UIColor colorWithHexString:@"CD3278"];
+    
+    _lineView.lineColor = [UIColor yellowColor];
+    _lineView.fillColor = [UIColor magentaColor];
     _lineView.isFillColor = YES;
     
     [self.view addSubview:_lineView];
@@ -44,6 +58,7 @@
     }];
     [_lineView layoutIfNeeded];
     _dataArray = @[@"12",@"33",@"26",@"10",@"7",@"30",@"21"];
+    _dataArray = dataArray;
 
     _lineView.dataArray = _dataArray;
     _lineView.leftMargin = 0;
