@@ -9,7 +9,7 @@
 #import "ZYWBaseChartView.h"
 #import "ZYWCandleModel.h"
 #import "ZYWCandleProtocol.h"
-
+//柱状图
 @interface ZYWCandleChartView : ZYWBaseChartView<ZYWCandleProtocol>
 
 /**

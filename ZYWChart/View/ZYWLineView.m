@@ -9,7 +9,7 @@
 #import "ZYWLineView.h"
 
 @interface ZYWLineView ()
-
+//采用 CAShapeLayer + UIBezierPath绘制，绘制效率高，占用内存低
 @property (nonatomic,strong) NSMutableArray *modelPostionArray;
 @property (nonatomic, strong) CAShapeLayer *lineChartLayer;
 
@@ -37,7 +37,7 @@
 }
 
 - (void)drawLineLayer
-{
+{//采用 CAShapeLayer + UIBezierPath绘制，绘制效率高，占用内存低
     UIBezierPath *path = [UIBezierPath drawLine:self.modelPostionArray];
     self.lineChartLayer = [CAShapeLayer layer];
     self.lineChartLayer.path = path.CGPath;
@@ -56,6 +56,7 @@
         [path addLineToPoint:CGPointMake(lastPoint.xPosition,self.height - self.topMargin)];
         [path addLineToPoint:CGPointMake(self.leftMargin, self.height - self.topMargin)];
         path.lineWidth = 0;
+//        _fillColor = [UIColor greenColor];
         [_fillColor setFill];
         [path fill];
         [path stroke];
@@ -65,7 +66,7 @@
 }
 
 - (void)startAnimation
-{
+{//添加动画
     CABasicAnimation*pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     pathAnimation.duration = 2.0f;
     pathAnimation.timingFunction= [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -88,12 +89,12 @@
 
 -(void)initConfig
 {
-    self.lineSpace = (DEVICE_WIDTH - self.leftMargin - self.rightMargin)/(_dataArray.count-1) ;
+    self.lineSpace = (DEVICE_WIDTH - self.leftMargin - self.rightMargin)/(_dataArray.count-1) ;//间距
     NSNumber *min  = [_dataArray valueForKeyPath:@"@min.floatValue"];
     NSNumber *max = [_dataArray valueForKeyPath:@"@max.floatValue"];
     self.maxY = [max floatValue];
     self.minY  = [min floatValue];
-    self.scaleY = (self.height - self.topMargin - self.bottomMargin)/(self.maxY-self.minY);
+    self.scaleY = (self.height - self.topMargin - self.bottomMargin)/(self.maxY-self.minY);//缩放因子
 }
 
 - (void)draw
@@ -104,7 +105,7 @@
 }
 
 - (void)stockFill
-{
+{//填充的实质就是调用view的setNeedsDisplay方法
     [self setNeedsDisplay];
 }
 

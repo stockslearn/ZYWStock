@@ -41,7 +41,8 @@
     UIBezierPath *path = [UIBezierPath drawLine:self.modelPostionArray];
     self.lineChartLayer = [CAShapeLayer layer];
     self.lineChartLayer.path = path.CGPath;
-    self.lineChartLayer.strokeColor = self.lineColor.CGColor;
+//    self.lineChartLayer.strokeColor = self.lineColor.CGColor;
+    self.lineChartLayer.strokeColor = [UIColor redColor].CGColor;
     self.lineChartLayer.fillColor = [[UIColor clearColor] CGColor];
     self.lineChartLayer.lineWidth = self.lineWidth;
     self.lineChartLayer.lineCap = kCALineCapRound;
@@ -102,8 +103,9 @@
 {
     _textLabel = [UILabel new];
     [self.superScrollView addSubview:_textLabel];
-    _textLabel.textColor = [UIColor whiteColor];
-    _textLabel.backgroundColor = [UIColor colorWithHexString:@"a8a8a8"];
+    _textLabel.textColor = [UIColor redColor];
+//    _textLabel.backgroundColor = [UIColor colorWithHexString:@"a8a8a8"];
+    _textLabel.backgroundColor = [UIColor redColor];
     _textLabel.font = [UIFont systemFontOfSize:14];
     _textLabel.textAlignment = NSTextAlignmentCenter;
     _textLabel.bounds = CGRectMake(0, 0, 100, 20);
@@ -111,10 +113,11 @@
     _textLabel.hidden = YES;
     
     self.xLayer = [CAShapeLayer layer];
-    self.xLayer.lineWidth = 1;
+    self.xLayer.lineWidth = 10;
     self.xLayer.lineCap = kCALineCapRound;
     self.xLayer.lineJoin = kCALineJoinRound;
-    self.xLayer.strokeColor = [UIColor colorWithHexString:@"FFA500"].CGColor;
+//    self.xLayer.strokeColor = [UIColor colorWithHexString:@"FFA500"].CGColor;
+    self.xLayer.strokeColor = [UIColor redColor].CGColor;
     self.xLayer.fillColor = [[UIColor clearColor] CGColor];
     [self.layer addSublayer:self.xLayer];
 }

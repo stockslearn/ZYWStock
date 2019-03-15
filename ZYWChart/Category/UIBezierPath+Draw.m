@@ -42,10 +42,10 @@
 
 + (UIBezierPath*)drawKLine:(CGFloat)open close:(CGFloat)close high:(CGFloat)high low:(CGFloat)low candleWidth:(CGFloat)candleWidth rect:(CGRect)rect xPostion:(CGFloat)xPostion lineWidth:(CGFloat)lineWidth
 {
-    UIBezierPath *candlePath = [UIBezierPath bezierPathWithRect:rect];
+    UIBezierPath *candlePath = [UIBezierPath bezierPathWithRect:rect];//柱状图📊
     candlePath.lineWidth = lineWidth;
-    [candlePath moveToPoint:CGPointMake(xPostion+candleWidth/2-lineWidth/2, high)];
-    [candlePath addLineToPoint:CGPointMake(xPostion+candleWidth/2-lineWidth/2, low)];
+    [candlePath moveToPoint:CGPointMake(xPostion+candleWidth/2-lineWidth/2, high)];//最大值
+    [candlePath addLineToPoint:CGPointMake(xPostion+candleWidth/2-lineWidth/2, low)];//最小值
     return candlePath;
 }
 

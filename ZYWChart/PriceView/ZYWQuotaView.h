@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZYWCandleModel.h"
-
+//公示牌
 @interface ZYWQuotaView : UIView
 
 @property (nonatomic,strong) ZYWCandleModel *model;

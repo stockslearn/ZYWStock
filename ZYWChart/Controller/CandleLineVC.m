@@ -37,7 +37,7 @@ typedef enum
 
 @interface CandleLineVC ()<NSXMLParserDelegate,ZYWCandleProtocol,ZYWTecnnicalViewDelegate,CandleCrossScreenVCDeleate>
 
-@property (nonatomic,strong) ZYWQuotaView *quotaView;
+@property (nonatomic,strong) ZYWQuotaView *quotaView;//公示牌
 @property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) ZYWCandleChartView *candleChartView;
 @property (nonatomic,strong) NSMutableArray *dataSource;

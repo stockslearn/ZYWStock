@@ -10,10 +10,10 @@
 
 @interface ZYWLineView : ZYWBaseChartView
 
-@property (nonatomic,strong) NSArray *dataArray;
+@property (nonatomic,strong) NSArray *dataArray;//数据源
 @property (nonatomic,strong) UIColor *fillColor;
 @property (nonatomic,assign) BOOL isFillColor;
 
-- (void)stockFill;
+- (void)stockFill;//填充
 
 @end

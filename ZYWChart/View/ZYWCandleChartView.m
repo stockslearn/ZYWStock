@@ -24,9 +24,9 @@ static inline bool isEqualZero(float value)
 @property (nonatomic,strong) FBKVOController *KVOController;
 @property (nonatomic,strong) NSMutableArray *modelArray;
 @property (nonatomic,strong) NSMutableArray *modelPostionArray;
-@property (nonatomic,strong) CAShapeLayer *ma5LineLayer;
-@property (nonatomic,strong) CAShapeLayer *ma10LineLayer;
-@property (nonatomic,strong) CAShapeLayer *ma25LineLayer;
+@property (nonatomic,strong) CAShapeLayer *ma5LineLayer;//5天均线
+@property (nonatomic,strong) CAShapeLayer *ma10LineLayer;//10天均线
+@property (nonatomic,strong) CAShapeLayer *ma25LineLayer;//25天均线
 @property (nonatomic,strong) CAShapeLayer *timeLayer;
 @property (nonatomic,strong) NSMutableArray *maPostionArray;
 @property (nonatomic,assign) CGFloat timeLayerHeight;
@@ -105,7 +105,7 @@ static inline bool isEqualZero(float value)
 #pragma mark privateMethod
 
 - (void)calcuteMaxAndMinValue
-{
+{//计算最大值 最小值
     self.maxY = CGFLOAT_MIN;
     self.minY  = CGFLOAT_MAX;
     NSInteger idx = 0;
@@ -122,7 +122,7 @@ static inline bool isEqualZero(float value)
             self.minY -= 0.5;
         }
     }
-    self.scaleY = (self.height - self.topMargin - self.bottomMargin - self.timeLayerHeight) / (self.maxY - self.minY);
+    self.scaleY = (self.height - self.topMargin - self.bottomMargin - self.timeLayerHeight) / (self.maxY - self.minY);//缩放因子
 }
 
 - (void)calcuteMaLinePostion

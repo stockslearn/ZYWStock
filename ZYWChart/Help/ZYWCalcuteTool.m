@@ -11,7 +11,7 @@
 #import "ZYWCandleModel.h"
 #import "ZYWMacdModel.h"
 
-ZYWLineData * computeMAData(NSArray *items,int period)
+ZYWLineData * computeMAData(NSArray *items,int period)//计算均线
 {
     NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     for (NSUInteger index = 0; index < items.count; index++) {
@@ -69,7 +69,7 @@ ZYWLineData * computeMAData(NSArray *items,int period)
     return maline;
 }
 
-NSMutableArray* computeMACDData(NSArray *items)
+NSMutableArray* computeMACDData(NSArray *items)//计算MAC的数据
 {
     NSMutableArray *arrCls = [[NSMutableArray alloc] init];
     for (NSUInteger index = 0; index < items.count; index++) {
@@ -123,7 +123,7 @@ NSMutableArray* computeMACDData(NSArray *items)
     return resultArray;
 }
 
-NSMutableArray *computeKDJData(NSArray *items) {
+NSMutableArray *computeKDJData(NSArray *items) {//计算KDJ的数据
     NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
     for (NSUInteger index = 0; index < items.count; index++) {
         ZYWCandleModel *item = [items objectAtIndex:items.count - 1 - index];
@@ -214,6 +214,7 @@ NSMutableArray *computeKDJData(NSArray *items) {
     return kdjData;
 }
 
+//计算WR的数据
 NSMutableArray *computeWRData(NSArray *items,int period)
 {
     NSMutableArray *arrHigval = [[NSMutableArray alloc] init];
